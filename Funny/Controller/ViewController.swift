@@ -8,11 +8,11 @@
 
 import UIKit
 
-class HomeController: UIViewController {
+class HomeController: Layout {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .black
+        view.backgroundColor = UIColor.App.background
         // Do any additional setup after loading the view, typically from a nib.
     }
 }

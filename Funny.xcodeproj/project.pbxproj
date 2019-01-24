@@ -11,6 +11,9 @@
 		D5A3708721F969CA00729981 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A3708621F969CA00729981 /* ViewController.swift */; };
 		D5A3708C21F969CB00729981 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5A3708B21F969CB00729981 /* Assets.xcassets */; };
 		D5A3708F21F969CB00729981 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D5A3708D21F969CB00729981 /* LaunchScreen.storyboard */; };
+		D5A3709B21F96BCA00729981 /* Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A3709A21F96BCA00729981 /* Hex.swift */; };
+		D5A3709D21F96C1500729981 /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A3709C21F96C1500729981 /* AppColors.swift */; };
+		D5A3709F21F96C4600729981 /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A3709E21F96C4600729981 /* Layout.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +23,9 @@
 		D5A3708B21F969CB00729981 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D5A3708E21F969CB00729981 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D5A3709021F969CB00729981 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D5A3709A21F96BCA00729981 /* Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hex.swift; sourceTree = "<group>"; };
+		D5A3709C21F96C1500729981 /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
+		D5A3709E21F96C4600729981 /* Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layout.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,10 +58,10 @@
 		D5A3708321F969CA00729981 /* Funny */ = {
 			isa = PBXGroup;
 			children = (
-				D5A3709921F96A7900729981 /* helpers */,
-				D5A3709821F96A7100729981 /* controller */,
-				D5A3709721F96A6D00729981 /* view */,
-				D5A3709621F96A6600729981 /* model */,
+				D5A3709921F96A7900729981 /* Helpers */,
+				D5A3709821F96A7100729981 /* Controller */,
+				D5A3709721F96A6D00729981 /* View */,
+				D5A3709621F96A6600729981 /* Model */,
 				D5A3708421F969CA00729981 /* AppDelegate.swift */,
 				D5A3708B21F969CB00729981 /* Assets.xcassets */,
 				D5A3708D21F969CB00729981 /* LaunchScreen.storyboard */,
@@ -64,33 +70,36 @@
 			path = Funny;
 			sourceTree = "<group>";
 		};
-		D5A3709621F96A6600729981 /* model */ = {
+		D5A3709621F96A6600729981 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			path = model;
+			path = Model;
 			sourceTree = "<group>";
 		};
-		D5A3709721F96A6D00729981 /* view */ = {
+		D5A3709721F96A6D00729981 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D5A3709E21F96C4600729981 /* Layout.swift */,
 			);
-			path = view;
+			path = View;
 			sourceTree = "<group>";
 		};
-		D5A3709821F96A7100729981 /* controller */ = {
+		D5A3709821F96A7100729981 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
 				D5A3708621F969CA00729981 /* ViewController.swift */,
 			);
-			path = controller;
+			path = Controller;
 			sourceTree = "<group>";
 		};
-		D5A3709921F96A7900729981 /* helpers */ = {
+		D5A3709921F96A7900729981 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				D5A3709A21F96BCA00729981 /* Hex.swift */,
+				D5A3709C21F96C1500729981 /* AppColors.swift */,
 			);
-			path = helpers;
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -163,6 +172,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D5A3709B21F96BCA00729981 /* Hex.swift in Sources */,
+				D5A3709D21F96C1500729981 /* AppColors.swift in Sources */,
+				D5A3709F21F96C4600729981 /* Layout.swift in Sources */,
 				D5A3708721F969CA00729981 /* ViewController.swift in Sources */,
 				D5A3708521F969CA00729981 /* AppDelegate.swift in Sources */,
 			);
