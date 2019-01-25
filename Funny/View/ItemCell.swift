@@ -29,7 +29,6 @@ class ItemCell: UICollectionViewCell, UIScrollViewDelegate {
         
         // Style elements
         scroll.fullCoverage(parent: self)
-        scroll.backgroundColor = .blue
         
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
@@ -39,44 +38,55 @@ class ItemCell: UICollectionViewCell, UIScrollViewDelegate {
         // Active constraint depends on image height
         imageTop = imageView.topAnchor.constraint(equalTo: scroll.topAnchor)
         imageCenter = self.imageView.centerYAnchor.constraint(equalTo: self.centerYAnchor)
+        
+        self.imageHeight = self.imageView.heightAnchor.constraint(equalToConstant: 100)
+        self.imageHeight?.isActive = true
     }
     
     func setImage(url: String) {
-        Networking.shared.fetchImageData(url: url) { (data) in
-            DispatchQueue.main.async() {
+        if let image = ImageCache.shared.image(forKey: url) {
+            // Found in cache, set it
+            placeImage(image: image)
+        } else {
+            Networking.shared.fetchImageData(url: url) { (data) in
                 if let image = UIImage(data: data) {
-                    let viewWidth = self.scroll.frame.width
-                    let viewHeight = self.scroll.frame.height
-                    let height = image.size.height
-                    let width = image.size.width
-                    let imageScale = viewWidth / width
-                    let scaledHeight = height * imageScale
+                    // Cache it for reuse
+                    ImageCache.shared.save(image: image, forKey: url)
                     
-                    // Set scrollview content height
-                    self.scroll.contentSize = CGSize(width: viewWidth, height: scaledHeight)
-                    
-                    // Set Image Height
-                    if (self.imageHeight != nil) {
-                        self.imageHeight?.constant = scaledHeight
-                    } else {
-                        self.imageHeight = self.imageView.heightAnchor.constraint(equalToConstant: scaledHeight)
-                        self.imageHeight?.isActive = true
-                    }
-                    
-                    
-                    // Center image
-                    if (viewHeight > scaledHeight) {
-                        self.imageTop?.isActive = false
-                        self.imageCenter?.isActive = true
-                    } else {
-                        self.imageTop?.isActive = true
-                        self.imageCenter?.isActive = false
-                    }
-
-                    // Set image
-                    self.imageView.image = image
+                    // Set it
+                    self.placeImage(image: image)
                 }
             }
+        }
+    }
+    
+    func placeImage(image: UIImage) {
+        DispatchQueue.main.async() {
+            // Calculate scaled height
+            let viewWidth = self.scroll.frame.width
+            let viewHeight = self.scroll.frame.height
+            let height = image.size.height
+            let width = image.size.width
+            let imageScale = viewWidth / width
+            let scaledHeight = height * imageScale
+            
+            // Set scrollview content height
+            self.scroll.contentSize = CGSize(width: viewWidth, height: scaledHeight)
+            
+            // Set Image Height
+            self.imageHeight?.constant = scaledHeight
+            
+            // Center image?
+            if (viewHeight > scaledHeight) {
+                self.imageTop?.isActive = false
+                self.imageCenter?.isActive = true
+            } else {
+                self.imageTop?.isActive = true
+                self.imageCenter?.isActive = false
+            }
+            
+            // Set image
+            self.imageView.image = image
         }
     }
 

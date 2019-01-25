@@ -18,12 +18,10 @@ class HomeController: Swiper {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Register Cell
         collectionView.register(ItemCell.self, forCellWithReuseIdentifier: cellId)
         
-        // Setup view
-        setupView()
-        
-        // Fetch items
+        // Fetch data
         Networking.shared.fetchJson(url: ApiRoutes.fetchItems) { (items:Items) in
             self.items = items.items
             
@@ -31,10 +29,15 @@ class HomeController: Swiper {
                 self.collectionView.reloadData()
             }
         }
-    }
-    
-    func setupView() {
-        collectionView.backgroundColor = .green
+        
+        // Set nav bar colors
+        navigationItem.title = "Latest"
+        
+        
+//        navigationController?.navigationBar.barTintColor = UIColor.App.primary
+//        navigationController?.navigationBar.isTranslucent = false
+//        navigationController?.navigationBar.tintColor = .white
+//        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.App.primaryText]
     }
     
     // MARK: Collection View Methods
@@ -47,6 +50,7 @@ class HomeController: Swiper {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! ItemCell
         
         let imageUrl = ApiRoutes.imageUrl(path: item.source)
+    
         
         cell.setImage(url: imageUrl)
 

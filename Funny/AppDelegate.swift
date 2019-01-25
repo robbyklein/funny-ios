@@ -19,14 +19,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
+        window?.rootViewController =  UINavigationController(rootViewController: HomeController())
         
-        // Hide nav var
-        let nav = UINavigationController(rootViewController: HomeController())
-        nav.isNavigationBarHidden = true
-        
-        // Set root view to nav
-        window?.rootViewController = nav
-        
+        // Style navbar
+        UINavigationBar.appearance().barTintColor = UIColor.App.primary
+        UINavigationBar.appearance().isTranslucent = false
+        UINavigationBar.appearance().tintColor = .white
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.App.primaryText]
+    
         return true
     }
 

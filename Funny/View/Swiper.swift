@@ -23,7 +23,11 @@ class Swiper: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         
         // Snapping
         collectionView.isPagingEnabled = true
+        
+        // Setup View
+        view.backgroundColor = UIColor.App.background
     }
+    
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -35,9 +39,5 @@ class Swiper: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.safeAreaLayoutGuide.layoutFrame.width, height: view.safeAreaLayoutGuide.layoutFrame.height)
-    }
-    
-    func prepareForReuse() {
-        print("fuck")
     }
 }

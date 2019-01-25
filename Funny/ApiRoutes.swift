@@ -9,7 +9,7 @@
 import Foundation
 
 struct ApiRoutes {
-    static let root = "https://24aeb6f5.ngrok.io"
+    static let root = "http://localhost:3000"
     static let fetchItems = "\(ApiRoutes.root)/api/items"
     
     static func imageUrl(path: String) -> String {
