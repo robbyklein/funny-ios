@@ -1,5 +1,5 @@
 //
-//  JSON.swift
+//  Networking.swift
 //  Funny
 //
 //  Created by Robby Klein on 1/24/19.
@@ -8,12 +8,12 @@
 
 import Foundation
 
-class JSON {
+class Networking {
     // Make impossible to init
     private init() {}
     
     // Make singleton instance
-    static let shared = JSON()
+    static let shared = Networking()
     
     // Json decoder
     let decoder = JSONDecoder()
@@ -45,4 +45,22 @@ class JSON {
             }
             }.resume()
     }
+    
+    func fetchImageData(url: String, completion: @escaping (_ data: Data) -> ()) {
+        if let url = URL(string: url) {
+            URLSession.shared.dataTask(with: url) { (data, response, error) in
+                if let error = error {
+                    print(error.localizedDescription)
+                    return
+                }
+                
+                if let data = data {
+                    completion(data)
+                }
+            }.resume()
+        }
+    
+    }
 }
+
+

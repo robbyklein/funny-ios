@@ -9,5 +9,10 @@
 import Foundation
 
 struct ApiRoutes {
-    static let fetchItems = "http://localhost:3000/api/items"
+    static let root = "http://localhost:3000"
+    static let fetchItems = "\(ApiRoutes.root)/api/items"
+    
+    static func imageUrl(path: String) -> String {
+        return ApiRoutes.root + path
+    }
 }
