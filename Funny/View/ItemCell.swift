@@ -81,8 +81,10 @@ class ItemCell: UICollectionViewCell, UIScrollViewDelegate {
     }
 
     override func prepareForReuse() {
+        self.imageView.image = nil
         self.imageTop?.isActive = false
         self.imageCenter?.isActive = false
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
