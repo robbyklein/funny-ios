@@ -12,9 +12,10 @@ class ItemCell: UICollectionViewCell, UIScrollViewDelegate {
     // Scroll View for overflow images
     let scroll = Scroll()
     
-    // The image
-    let imageView = UIImageView()
-    
+    // Elements
+    let imageView = Image()
+    let loading = Image()
+
     // Image height constraint
     var imageHeight:NSLayoutConstraint?
     var imageTop:NSLayoutConstraint?
@@ -25,15 +26,21 @@ class ItemCell: UICollectionViewCell, UIScrollViewDelegate {
         
         // Add elements to cell
         self.addSubview(scroll)
+        scroll.addSubview(loading)
         scroll.addSubview(imageView)
         
         // Style elements
         scroll.fullCoverage(parent: self)
         
-        imageView.translatesAutoresizingMaskIntoConstraints = false
+        loading.image = UIImage(named: "loading")
+        loading.centerXAnchor.constraint(equalTo: scroll.centerXAnchor).isActive = true
+        loading.centerYAnchor.constraint(equalTo: scroll.centerYAnchor).isActive = true
+        loading.setSize(width: 64, height: 64)
+        loading.rotate()
+        
+        imageView.alpha = 0
         imageView.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
         imageView.leftAnchor.constraint(equalTo: scroll.leftAnchor).isActive = true
-        imageView.contentMode = .scaleAspectFit
         
         // Active constraint depends on image height
         imageTop = imageView.topAnchor.constraint(equalTo: scroll.topAnchor)
@@ -87,10 +94,13 @@ class ItemCell: UICollectionViewCell, UIScrollViewDelegate {
             
             // Set image
             self.imageView.image = image
+            self.imageView.fadeIn(duration: 0.2, delay: 0.2)
         }
     }
 
     override func prepareForReuse() {
+        self.loading.alpha = 1
+        self.imageView.alpha = 0
         self.imageView.image = nil
         self.imageTop?.isActive = false
         self.imageCenter?.isActive = false
