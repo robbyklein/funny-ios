@@ -29,15 +29,6 @@ class HomeController: Swiper {
                 self.collectionView.reloadData()
             }
         }
-        
-        // Set nav bar colors
-        navigationItem.title = "Latest"
-        
-        
-//        navigationController?.navigationBar.barTintColor = UIColor.App.primary
-//        navigationController?.navigationBar.isTranslucent = false
-//        navigationController?.navigationBar.tintColor = .white
-//        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.App.primaryText]
     }
     
     // MARK: Collection View Methods

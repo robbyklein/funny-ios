@@ -24,8 +24,11 @@ class Swiper: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         // Snapping
         collectionView.isPagingEnabled = true
         
-        // Setup View
-        view.backgroundColor = UIColor.App.background
+        let logo = Image()
+        logo.image = UIImage(named: "logo")
+        logo.setSize(width: 40.8, height: 20)
+        
+        navigationItem.titleView = logo
     }
     
     

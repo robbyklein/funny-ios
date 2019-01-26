@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController =  UINavigationController(rootViewController: HomeController())
         
         // Style navbar
-        UINavigationBar.appearance().barTintColor = UIColor.App.primary
+        UINavigationBar.appearance().barTintColor = .black
         UINavigationBar.appearance().isTranslucent = false
         UINavigationBar.appearance().tintColor = .white
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.App.primaryText]

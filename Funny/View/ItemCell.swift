@@ -24,6 +24,8 @@ class ItemCell: UICollectionViewCell, UIScrollViewDelegate {
     override init(frame: CGRect) {
         super.init(frame: .zero)
         
+        self.backgroundColor = UIColor.App.background
+        
         // Add elements to cell
         self.addSubview(scroll)
         scroll.addSubview(loading)
