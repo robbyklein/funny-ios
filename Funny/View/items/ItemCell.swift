@@ -57,13 +57,21 @@ class ItemCell: UICollectionViewCell, UIScrollViewDelegate {
         if let image = ImageCache.shared.image(forKey: url) {
             // Found in cache, set it
             placeImage(image: image)
+        
         } else {
             Networking.shared.fetchImageData(url: url) { (data, error) in
-                if let error = error {
-                    print(error.localizedDescription)
+                // If theres an error show fallback image
+                if let error = error?.localizedDescription {
+                    let named = error == "404 Not Found" ? "image_404" : "image_failed"
+                
+                    if let image = UIImage(named: named) {
+                        self.placeImage(image: image)
+                    }
+
                     return
                 }
                 
+                // Otherwise show the actual image
                 if let data = data {
                     if let image = UIImage(data: data) {
                         // Cache it for reuse

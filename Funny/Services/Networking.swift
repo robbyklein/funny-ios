@@ -6,6 +6,7 @@
 //  Copyright © 2019 Robby Klein. All rights reserved.
 //
 
+
 import Foundation
 
 class Networking {
@@ -49,11 +50,21 @@ class Networking {
     func fetchImageData(url: String, completion: @escaping (_ data: Data?, Error?) -> ()) {
         if let url = URL(string: url) {
             URLSession.shared.dataTask(with: url) { (data, response, error) in
+                // Image not found
+                if let httpResponse = response as? HTTPURLResponse {
+                    if httpResponse.statusCode != 200 {
+                        completion(nil, "404 Not Found")
+                        return
+                    }
+                }
+                
+                // Download Error
                 if let error = error {
                     completion(nil, error)
                     return
                 }
                 
+                // Success
                 if let data = data {
                     completion(data, nil)
                 }
