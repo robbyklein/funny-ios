@@ -65,23 +65,48 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         // Style Elements
         self.setupView()
-
+        
+        // Events
+        actionbar.share.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleShare)))
     }
-
     
+    // -----------------------------
+    // MARK: Event Handlers
+    // -----------------------------
+
+    @objc func handleShare() {
+        // Get active item
+        let cellIndex = collectionView.indexPathsForVisibleItems[0]
+        let cell = collectionView.cellForItem(at: cellIndex) as! ItemCell
+
+        // image to share
+        let image = cell.imageView.image
+        
+        // set up activity view controller
+        let imageToShare = [ image! ]
+        let activityViewController = UIActivityViewController(activityItems: imageToShare, applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
+        
+        // exclude some activity types from the list (optional)
+        activityViewController.excludedActivityTypes = [ UIActivity.ActivityType.airDrop, UIActivity.ActivityType.postToFacebook ]
+        
+        // present the view controller
+        self.present(activityViewController, animated: true, completion: nil)
+    }
     
     // -----------------------------
     // MARK: Stylistic
     // -----------------------------
+
     func setupView() {
         view.addSubview(actionbar)
         actionbar.setSize(parent: view)
     }
     
-    
     // -----------------------------
     // MARK: Collection View Methods
     // -----------------------------
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return items.count
     }
