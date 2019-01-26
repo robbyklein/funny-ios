@@ -47,24 +47,31 @@ class ItemCell: UICollectionViewCell, UIScrollViewDelegate {
         
         // Active constraint depends on image height
         imageTop = imageView.topAnchor.constraint(equalTo: scroll.topAnchor)
-        imageCenter = self.imageView.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: -30)
+        imageCenter = self.imageView.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: -20)
         
         self.imageHeight = self.imageView.heightAnchor.constraint(equalToConstant: 100)
         self.imageHeight?.isActive = true
     }
     
-    func setImage(url: String) {
+    func setImage(url: String) {        
         if let image = ImageCache.shared.image(forKey: url) {
             // Found in cache, set it
             placeImage(image: image)
         } else {
-            Networking.shared.fetchImageData(url: url) { (data) in
-                if let image = UIImage(data: data) {
-                    // Cache it for reuse
-                    ImageCache.shared.save(image: image, forKey: url)
-                    
-                    // Set it
-                    self.placeImage(image: image)
+            Networking.shared.fetchImageData(url: url) { (data, error) in
+                if let error = error {
+                    print(error.localizedDescription)
+                    return
+                }
+                
+                if let data = data {
+                    if let image = UIImage(data: data) {
+                        // Cache it for reuse
+                        ImageCache.shared.save(image: image, forKey: url)
+                        
+                        // Set it
+                        self.placeImage(image: image)
+                    }
                 }
             }
         }

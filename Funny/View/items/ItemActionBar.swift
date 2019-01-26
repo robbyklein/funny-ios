@@ -9,22 +9,53 @@
 import UIKit
 
 class ItemActionBar: UIView {
-    // Elements
-    let stack = Stack(axis: .horizontal, spacing: 10)
-    let share = UIButton(type: .system)
 
+    
+    // Elements
+    let stack = Stack(axis: .horizontal, spacing: 10, distribution: .equalSpacing)
+
+    let share = UIButton(type: .system)
+    let shareIcon = UIImage(named: "share")
+
+    let shuffle = UIButton(type: .system)
+    let shuffleIcon = UIImage(named: "dice")
+    
+
+    let thumbsUp = UIButton(type: .system)
+    let thumbsUpIcon = UIImage(named: "thumbs_up")
+    
+    let thumbsDown = UIButton(type: .system)
+    let thumbsDownIcon = UIImage(named: "thumbs_down")
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         self.translatesAutoresizingMaskIntoConstraints = false
-        self.backgroundColor = .black
+        self.backgroundColor = UIColor.App.primary
         self.addSubview(stack)
-
-        share.setTitle("share", for: .normal)
-        share.setTitleColor(.white, for: .normal)
+        
+        share.setImage(shareIcon, for: .normal)
+        share.tintColor = UIColor.App.primaryText
+        
+        shuffle.setImage(shuffleIcon, for: .normal)
+        shuffle.tintColor = UIColor.App.primaryText
+        
+        thumbsUp.setImage(thumbsUpIcon, for: .normal)
+        thumbsUp.tintColor = UIColor.App.primaryText
+        
+        thumbsDown.setImage(thumbsDownIcon, for: .normal)
+        thumbsDown.tintColor = UIColor.App.primaryText
         
         stack.addArrangedSubview(share)
+        stack.addArrangedSubview(shuffle)
+        stack.addArrangedSubview(thumbsDown)
+        stack.addArrangedSubview(thumbsUp)
         
+        stack.widthAnchor.constraint(equalTo: self.widthAnchor, constant: -60).isActive = true
+        stack.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        stack.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+
+
     }
     
 
@@ -38,8 +69,8 @@ class ItemActionBar: UIView {
     
     func setSize(parent: UIView) {
         self.widthAnchor.constraint(equalTo: parent.widthAnchor).isActive = true
-        self.heightAnchor.constraint(equalToConstant: 60).isActive = true
-        self.bottomAnchor.constraint(equalTo: parent.bottomAnchor).isActive = true
+        self.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        self.bottomAnchor.constraint(equalTo: parent.safeAreaLayoutGuide.bottomAnchor).isActive = true
         self.leftAnchor.constraint(equalTo: parent.leftAnchor).isActive = true
     }
 }

@@ -15,10 +15,11 @@ class Stack: UIStackView {
         self.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    convenience init(axis: NSLayoutConstraint.Axis, spacing: CGFloat) {
+    convenience init(axis: NSLayoutConstraint.Axis, spacing: CGFloat, distribution: UIStackView.Distribution) {
         self.init(frame: .zero)
         self.spacing = spacing
         self.axis = axis
+        self.distribution = distribution
     }
     
     required init(coder: NSCoder) {

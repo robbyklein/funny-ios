@@ -48,12 +48,19 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         // Register Cell
         collectionView.register(ItemCell.self, forCellWithReuseIdentifier: cellId)
         
-        // Fetch data
-        Networking.shared.fetchJson(url: ApiRoutes.fetchItems) { (items:Items) in
-            self.items = items.items
+        // Fetch data        
+        Networking.shared.fetchJson(url: ApiRoutes.fetchItems) { (items:Items?, error:Error?) in
+            if (error != nil) {
+                print(error?.localizedDescription)
+                return
+            }
             
-            DispatchQueue.main.async() {
-                self.collectionView.reloadData()
+            if let items = items {
+                self.items = items.items
+                
+                DispatchQueue.main.async() {
+                    self.collectionView.reloadData()
+                }
             }
         }
         
@@ -76,22 +83,30 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
 
     @objc func handleShare() {
         // Get active item
-        let cellIndex = collectionView.indexPathsForVisibleItems[0]
-        let cell = collectionView.cellForItem(at: cellIndex) as! ItemCell
+        let cellIndexes = collectionView.indexPathsForVisibleItems
+        
+        if cellIndexes.count > 0 {
+            let cellIndex = cellIndexes[0]
+            let cell = collectionView.cellForItem(at: cellIndex) as! ItemCell
 
-        // image to share
-        let image = cell.imageView.image
-        
-        // set up activity view controller
-        let imageToShare = [ image! ]
-        let activityViewController = UIActivityViewController(activityItems: imageToShare, applicationActivities: nil)
-        activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
-        
-        // exclude some activity types from the list (optional)
-        activityViewController.excludedActivityTypes = [ UIActivity.ActivityType.airDrop, UIActivity.ActivityType.postToFacebook ]
-        
-        // present the view controller
-        self.present(activityViewController, animated: true, completion: nil)
+            // image to share
+            if let image = cell.imageView.image {
+                // set up activity view controller
+                let imageToShare = [ image ]
+                let activityViewController = UIActivityViewController(activityItems: imageToShare, applicationActivities: nil)
+                activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
+                
+                // exclude some activity types from the list (optional)
+                activityViewController.excludedActivityTypes = [
+                    UIActivity.ActivityType.postToVimeo,
+                    UIActivity.ActivityType.addToReadingList,
+                    UIActivity.ActivityType.markupAsPDF,
+                ]
+                
+                // present the view controller
+                self.present(activityViewController, animated: true, completion: nil)
+            }
+        }
     }
     
     // -----------------------------

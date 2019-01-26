@@ -19,7 +19,7 @@ class Networking {
     let decoder = JSONDecoder()
     
     // Fetch json
-    func fetchJson<T:Decodable>(url: String, completion: @escaping (T) -> ()) {
+    func fetchJson<T:Decodable>(url: String, completion: @escaping (T?, Error?) -> ()) {
         // Create url from string
         guard let url = URL(string: ApiRoutes.fetchItems) else { return }
         
@@ -27,7 +27,7 @@ class Networking {
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             // Return early if there's an error
             if let error = error {
-                print(error.localizedDescription)
+                completion(nil, error)
                 return
             }
             
@@ -38,7 +38,7 @@ class Networking {
                     let json = try JSONDecoder().decode(T.self, from: data)
                     
                     // Call the callback
-                    completion(json)
+                    completion(json, nil)
                 } catch {
                     print(error.localizedDescription)
                 }
@@ -46,16 +46,16 @@ class Networking {
             }.resume()
     }
     
-    func fetchImageData(url: String, completion: @escaping (_ data: Data) -> ()) {
+    func fetchImageData(url: String, completion: @escaping (_ data: Data?, Error?) -> ()) {
         if let url = URL(string: url) {
             URLSession.shared.dataTask(with: url) { (data, response, error) in
                 if let error = error {
-                    print(error.localizedDescription)
+                    completion(nil, error)
                     return
                 }
                 
                 if let data = data {
-                    completion(data)
+                    completion(data, nil)
                 }
             }.resume()
         }
