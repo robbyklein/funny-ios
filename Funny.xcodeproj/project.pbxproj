@@ -24,6 +24,7 @@
 		D5EFDC8E21FAE13E0034BCFC /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5EFDC8D21FAE13E0034BCFC /* Stack.swift */; };
 		D5EFDC9021FAE5C30034BCFC /* Scroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5EFDC8F21FAE5C30034BCFC /* Scroll.swift */; };
 		D5FB748021FBC4AC00D2A4FC /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5FB747F21FBC4AC00D2A4FC /* Image.swift */; };
+		D5FB748221FBEC6B00D2A4FC /* ItemActionBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5FB748121FBEC6B00D2A4FC /* ItemActionBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		D5EFDC8D21FAE13E0034BCFC /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
 		D5EFDC8F21FAE5C30034BCFC /* Scroll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scroll.swift; sourceTree = "<group>"; };
 		D5FB747F21FBC4AC00D2A4FC /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		D5FB748121FBEC6B00D2A4FC /* ItemActionBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemActionBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +110,7 @@
 				D5EFDC8D21FAE13E0034BCFC /* Stack.swift */,
 				D5EFDC8F21FAE5C30034BCFC /* Scroll.swift */,
 				D5FB747F21FBC4AC00D2A4FC /* Image.swift */,
+				D5FB748121FBEC6B00D2A4FC /* ItemActionBar.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -223,6 +226,7 @@
 				D5A3708521F969CA00729981 /* AppDelegate.swift in Sources */,
 				D5A370A821FA442100729981 /* Networking.swift in Sources */,
 				D5DABB4721FA54320039107B /* Swiper.swift in Sources */,
+				D5FB748221FBEC6B00D2A4FC /* ItemActionBar.swift in Sources */,
 				D5A370AA21FA480800729981 /* AboutController.swift in Sources */,
 				D5A370AC21FA481400729981 /* ReportController.swift in Sources */,
 			);

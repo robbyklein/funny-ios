@@ -18,11 +18,4 @@ class Scroll: UIScrollView {
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    func fullCoverage(parent: UIView) {
-        self.widthAnchor.constraint(equalTo: parent.widthAnchor).isActive = true
-        self.heightAnchor.constraint(equalTo: parent.heightAnchor).isActive = true
-        self.topAnchor.constraint(equalTo: parent.topAnchor).isActive = true
-        self.leftAnchor.constraint(equalTo: parent.leftAnchor).isActive = true
-    }
 }

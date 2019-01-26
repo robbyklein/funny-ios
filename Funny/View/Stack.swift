@@ -13,8 +13,12 @@ class Stack: UIStackView {
         super.init(frame: .zero)
         
         self.translatesAutoresizingMaskIntoConstraints = false
-        self.axis = .vertical
-        backgroundColor = .orange
+    }
+    
+    convenience init(axis: NSLayoutConstraint.Axis, spacing: CGFloat) {
+        self.init(frame: .zero)
+        self.spacing = spacing
+        self.axis = axis
     }
     
     required init(coder: NSCoder) {
