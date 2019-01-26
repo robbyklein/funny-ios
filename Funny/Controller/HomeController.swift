@@ -8,13 +8,40 @@
 
 import UIKit
 
-class HomeController: Swiper {
+class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+    // -----------------------------
+    // MARK: Properties / Elements
+    // -----------------------------
+    
     // Cell Id
     let cellId = "itemCell"
     
     // Store Array of Items
     var items = [Item]()
+    
+    // Bottom action bar
+    let actionbar = ItemActionBar()
 
+    // -----------------------------
+    // MARK: Initiation
+    // -----------------------------
+    
+    override init(collectionViewLayout layout: UICollectionViewLayout) {
+        super.init(collectionViewLayout: layout)
+    }
+    
+    convenience init() {
+        // Set up layout
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        
+        self.init(collectionViewLayout: layout)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -29,9 +56,32 @@ class HomeController: Swiper {
                 self.collectionView.reloadData()
             }
         }
+        
+        // Snapping
+        collectionView.isPagingEnabled = true
+        
+        // add logo to nav
+        self.setupNav()
+        
+        // Style Elements
+        self.setupView()
+
+    }
+
+    
+    
+    // -----------------------------
+    // MARK: Stylistic
+    // -----------------------------
+    func setupView() {
+        view.addSubview(actionbar)
+        actionbar.setSize(parent: view)
     }
     
+    
+    // -----------------------------
     // MARK: Collection View Methods
+    // -----------------------------
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return items.count
     }
@@ -42,11 +92,17 @@ class HomeController: Swiper {
         
         let imageUrl = ApiRoutes.imageUrl(path: item.source)
     
-        
         cell.setImage(url: imageUrl)
 
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: view.safeAreaLayoutGuide.layoutFrame.width, height: view.safeAreaLayoutGuide.layoutFrame.height)
+    }
 }
 

@@ -10,12 +10,11 @@ import UIKit
 
 class ItemCell: UICollectionViewCell, UIScrollViewDelegate {
     // Scroll View for overflow images
-    let scroll = Scroll()
+    let scroll = ItemScroll()
     
     // Elements
     let imageView = Image()
     let loading = Image()
-    let actionbar = ItemActionBar()
 
     // Image height constraint
     var imageHeight:NSLayoutConstraint?
@@ -29,24 +28,13 @@ class ItemCell: UICollectionViewCell, UIScrollViewDelegate {
         
         // Add elements to cell
         self.addSubview(scroll)
-        self.addSubview(actionbar)
 
         scroll.addSubview(loading)
         scroll.addSubview(imageView)
-        scroll.backgroundColor = .orange
         
         // Style elements
-        scroll.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
-        scroll.heightAnchor.constraint(equalTo: self.heightAnchor, constant: -60).isActive = true
-        scroll.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        scroll.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
-        
-        actionbar.backgroundColor = .green
-        actionbar.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
-        actionbar.heightAnchor.constraint(equalToConstant: 60).isActive = true
-        actionbar.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-        actionbar.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
-        
+        scroll.setSize(parent: self)
+
         loading.image = UIImage(named: "loading")
         loading.centerXAnchor.constraint(equalTo: scroll.centerXAnchor).isActive = true
         loading.centerYAnchor.constraint(equalTo: scroll.centerYAnchor).isActive = true
