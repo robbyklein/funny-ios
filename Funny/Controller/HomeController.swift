@@ -75,6 +75,8 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         // Events
         actionbar.share.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleShare)))
+        actionbar.shuffle.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleShuffle)))
+
     }
     
     // -----------------------------
@@ -106,6 +108,31 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
                 // present the view controller
                 self.present(activityViewController, animated: true, completion: nil)
             }
+        }
+    }
+    
+    @objc func handleShuffle() {
+        // Create copy of items shuffled
+        let shuffled = self.items.shuffled()
+        
+        // Get active item(s)
+        let cellIndexes = collectionView.indexPathsForVisibleItems
+        
+        if cellIndexes.count > 0 {
+            // Get the cell index
+            let cellIndex = Int(cellIndexes[0][1])
+
+            // New array of only past and current items
+            var newItems = Array(self.items[0...cellIndex])
+
+            // Append the shuffled items
+            newItems.append(contentsOf: shuffled)
+            
+            // Set items
+            self.items = newItems
+
+            // Reload collection view
+            collectionView.reloadData()
         }
     }
     
