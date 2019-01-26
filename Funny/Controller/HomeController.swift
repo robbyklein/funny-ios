@@ -51,7 +51,9 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         // Fetch data        
         Networking.shared.fetchJson(url: ApiRoutes.fetchItems) { (items:Items?, error:Error?) in
             if (error != nil) {
-                print(error?.localizedDescription)
+                if let error = error?.localizedDescription {
+                    print(error)
+                }
                 return
             }
             
@@ -112,27 +114,29 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     @objc func handleShuffle() {
-        // Create copy of items shuffled
-        let shuffled = self.items.shuffled()
-        
         // Get active item(s)
         let cellIndexes = collectionView.indexPathsForVisibleItems
         
         if cellIndexes.count > 0 {
             // Get the cell index
             let cellIndex = Int(cellIndexes[0][1])
-
-            // New array of only past and current items
-            var newItems = Array(self.items[0...cellIndex])
-
-            // Append the shuffled items
-            newItems.append(contentsOf: shuffled)
             
-            // Set items
-            self.items = newItems
+            if cellIndex != self.items.count-1 {
+                // Create shuffled array of unseen items
+                let shuffled = Array(self.items[cellIndex+1...self.items.count-1]).shuffled()
 
-            // Reload collection view
-            collectionView.reloadData()
+                // New array of only past and current items
+                var newItems = Array(self.items[0...cellIndex])
+
+                // Append the shuffled items
+                newItems.append(contentsOf: shuffled)
+                
+                // Set items
+                self.items = newItems
+
+                // Reload collection view
+                collectionView.reloadData()
+            }
         }
     }
     
