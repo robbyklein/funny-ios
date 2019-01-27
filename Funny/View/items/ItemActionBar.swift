@@ -19,7 +19,9 @@ class ItemActionBar: UIView {
 
     let shuffle = UIButton(type: .system)
     let shuffleIcon = UIImage(named: "dice")
-    
+
+    let add = UIButton(type: .system)
+    let addIcon = UIImage(named: "plus")
 
     let thumbsUp = UIButton(type: .system)
     let thumbsUpIcon = UIImage(named: "thumbs_up")
@@ -40,6 +42,9 @@ class ItemActionBar: UIView {
         shuffle.setImage(shuffleIcon, for: .normal)
         shuffle.tintColor = UIColor.App.primaryText
         
+        add.setImage(addIcon, for: .normal)
+        add.tintColor = UIColor.App.primaryText
+        
         thumbsUp.setImage(thumbsUpIcon, for: .normal)
         thumbsUp.tintColor = UIColor.App.primaryText
         
@@ -48,14 +53,12 @@ class ItemActionBar: UIView {
         
         stack.addArrangedSubview(share)
         stack.addArrangedSubview(shuffle)
+        stack.addArrangedSubview(add)
         stack.addArrangedSubview(thumbsDown)
         stack.addArrangedSubview(thumbsUp)
         
         stack.widthAnchor.constraint(equalTo: self.widthAnchor, constant: -60).isActive = true
-        stack.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        stack.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-
-
+        stack.centerCenter(parent: self)
     }
     
 
