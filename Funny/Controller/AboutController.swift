@@ -6,4 +6,10 @@
 //  Copyright © 2019 Robby Klein. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+class AboutController: UIViewController {
+    override func viewDidLoad() {
+        view.backgroundColor = .green
+    }
+}

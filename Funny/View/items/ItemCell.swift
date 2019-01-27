@@ -28,17 +28,15 @@ class ItemCell: UICollectionViewCell, UIScrollViewDelegate {
         
         // Add elements to cell
         self.addSubview(scroll)
-
         scroll.addSubview(loading)
         scroll.addSubview(imageView)
         
         // Style elements
-        scroll.setSize(parent: self)
+        scroll.fullCoverage(parent: self, heightConstant: -50, widthConstant: 0)
 
         loading.image = UIImage(named: "loading")
-        loading.centerXAnchor.constraint(equalTo: scroll.centerXAnchor).isActive = true
-        loading.centerYAnchor.constraint(equalTo: scroll.centerYAnchor).isActive = true
-        loading.setSize(width: 64, height: 64)
+        loading.centerCenter(parent: scroll)
+        loading.setSize(widthConstant: 64, heightConstant: 64)
         loading.rotate()
         
         imageView.alpha = 0

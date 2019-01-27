@@ -25,8 +25,8 @@ class Stack: UIStackView {
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    func fullCoverage(parent: UIView) {
-
-    }
+//    
+//    func fullCoverage(parent: UIView) {
+//
+//    }
 }

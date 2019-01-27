@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D512D00B21FCEFB600A93059 /* IconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D512D00A21FCEFB600A93059 /* IconButton.swift */; };
 		D512D00D21FD1A2700A93059 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = D512D00C21FD1A2700A93059 /* Error.swift */; };
+		D5A0815821FE65A8000C7E0A /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A0815721FE65A8000C7E0A /* View.swift */; };
+		D5A0815A21FE6926000C7E0A /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A0815921FE6926000C7E0A /* MenuController.swift */; };
 		D5A3708521F969CA00729981 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A3708421F969CA00729981 /* AppDelegate.swift */; };
 		D5A3708721F969CA00729981 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A3708621F969CA00729981 /* HomeController.swift */; };
 		D5A3708C21F969CB00729981 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5A3708B21F969CB00729981 /* Assets.xcassets */; };
@@ -30,8 +31,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D512D00A21FCEFB600A93059 /* IconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconButton.swift; sourceTree = "<group>"; };
 		D512D00C21FD1A2700A93059 /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
+		D5A0815721FE65A8000C7E0A /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
+		D5A0815921FE6926000C7E0A /* MenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
 		D5A3708121F969CA00729981 /* Funny.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Funny.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5A3708421F969CA00729981 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D5A3708621F969CA00729981 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 				D5A3708621F969CA00729981 /* HomeController.swift */,
 				D5A370A921FA480800729981 /* AboutController.swift */,
 				D5A370AB21FA481400729981 /* ReportController.swift */,
+				D5A0815921FE6926000C7E0A /* MenuController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -132,6 +135,7 @@
 				D5A3709C21F96C1500729981 /* AppColors.swift */,
 				D5FB748721FC311900D2A4FC /* SetupNav.swift */,
 				D512D00C21FD1A2700A93059 /* Error.swift */,
+				D5A0815721FE65A8000C7E0A /* View.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -150,7 +154,6 @@
 			children = (
 				D5EFDC8D21FAE13E0034BCFC /* Stack.swift */,
 				D5FB747F21FBC4AC00D2A4FC /* Image.swift */,
-				D512D00A21FCEFB600A93059 /* IconButton.swift */,
 			);
 			path = global;
 			sourceTree = "<group>";
@@ -239,8 +242,10 @@
 				D5EFDC8E21FAE13E0034BCFC /* Stack.swift in Sources */,
 				D5A370A621F98F7D00729981 /* ApiRoutes.swift in Sources */,
 				D5A3709D21F96C1500729981 /* AppColors.swift in Sources */,
+				D5A0815A21FE6926000C7E0A /* MenuController.swift in Sources */,
 				D5FB748021FBC4AC00D2A4FC /* Image.swift in Sources */,
 				D5EFDC9021FAE5C30034BCFC /* ItemScroll.swift in Sources */,
+				D5A0815821FE65A8000C7E0A /* View.swift in Sources */,
 				D5DABB4921FA7CE90039107B /* ItemCell.swift in Sources */,
 				D5A3708721F969CA00729981 /* HomeController.swift in Sources */,
 				D5A370A121F9825E00729981 /* Item.swift in Sources */,
@@ -249,7 +254,6 @@
 				D5A370A821FA442100729981 /* Networking.swift in Sources */,
 				D5FB748221FBEC6B00D2A4FC /* ItemActionBar.swift in Sources */,
 				D5A370AA21FA480800729981 /* AboutController.swift in Sources */,
-				D512D00B21FCEFB600A93059 /* IconButton.swift in Sources */,
 				D5A370AC21FA481400729981 /* ReportController.swift in Sources */,
 				D512D00D21FD1A2700A93059 /* Error.swift in Sources */,
 				D5FB748821FC311900D2A4FC /* SetupNav.swift in Sources */,

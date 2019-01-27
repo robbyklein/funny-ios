@@ -20,11 +20,6 @@ class Image: UIImageView {
         self.contentMode = .scaleAspectFit
     }
     
-    func setSize(width: CGFloat, height: CGFloat) {
-        self.widthAnchor.constraint(equalToConstant: width).isActive = true
-        self.heightAnchor.constraint(equalToConstant: height).isActive = true
-    }
-    
     func rotate() {
         UIView.animate(withDuration: 1, delay: 0.0, options: .curveLinear, animations: {
             self.transform = self.transform.rotated(by: CGFloat(Float.pi))
