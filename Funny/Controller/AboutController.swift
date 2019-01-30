@@ -10,6 +10,9 @@ import UIKit
 
 class AboutController: UIViewController {
     override func viewDidLoad() {
-        view.backgroundColor = .green
+        view.backgroundColor = UIColor.App.background
+        
+        setupNav()
+        navigationItem.title = "About"
     }
 }

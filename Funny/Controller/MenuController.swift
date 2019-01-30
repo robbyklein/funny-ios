@@ -28,5 +28,17 @@ class MenuController: UIViewController {
         latest.setWidth(parent: view)
         favorites.setWidth(parent: view)
         about.setWidth(parent: view)
+        
+        // Tap Events
+        latest.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleLatest)))
+        about.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleAbout)))
+    }
+    
+    @objc func handleLatest() {
+        navigationController?.pushViewController(HomeController(), animated: true)
+    }
+    
+    @objc func handleAbout() {
+        navigationController?.pushViewController(AboutController(), animated: true)
     }
 }
