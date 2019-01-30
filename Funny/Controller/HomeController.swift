@@ -70,6 +70,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         collectionView.isPagingEnabled = true
         
         // add logo to nav
+        navigationItem.title = "Latest"
         self.setupNav()
         
         // Style Elements

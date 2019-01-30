@@ -13,21 +13,17 @@ extension UIViewController {
     
     func setupNav(close:Bool = false) {
         // Add logo
-        let logo = Image()
-        logo.image = UIImage(named: "logo")
-        logo.setSize(widthConstant: 40.8, heightConstant: 20)
-        self.navigationItem.titleView = logo
+        let logo = UIBarButtonItem(image: UIImage(named: "logo"), style: .plain, target: self, action: nil)
+        self.navigationItem.leftBarButtonItem = logo
         
         // Burger/Back Button
         if (close) {
             let close = UIBarButtonItem(image: UIImage(named: "close"), style: .plain, target: self, action: #selector(handleMenuClose))
-            self.navigationItem.leftBarButtonItem = close
+            self.navigationItem.rightBarButtonItem = close
         } else {
             let menu = UIBarButtonItem(image: UIImage(named: "hamburger"), style: .plain, target: self, action: #selector(handleMenu))
-            self.navigationItem.leftBarButtonItem = menu
+            self.navigationItem.rightBarButtonItem = menu
         }
-        
-
     }
     
     @objc func handleMenu() {
