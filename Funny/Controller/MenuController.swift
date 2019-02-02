@@ -10,9 +10,9 @@ import UIKit
 
 class MenuController: UIViewController {
     let nav = Stack(axis: .vertical, spacing: 30, distribution: .equalSpacing)
-    let latest = MenuItem(title: "Latest", to: HomeController())
-    let favorites = MenuItem(title: "Favorites", to: HomeController())
-    let about = MenuItem(title: "About", to: HomeController())
+    let latest = MenuItem(title: "Latest", to: LatestController())
+    let favorites = MenuItem(title: "Favorites", to: LatestController())
+    let about = MenuItem(title: "About", to: LatestController())
 
     override func viewDidLoad() {
         self.setupNav(close: true)
@@ -31,11 +31,16 @@ class MenuController: UIViewController {
         
         // Tap Events
         latest.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleLatest)))
+        favorites.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleFavorites)))
         about.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleAbout)))
     }
     
     @objc func handleLatest() {
-        navigationController?.pushViewController(HomeController(), animated: true)
+        navigationController?.pushViewController(LatestController(), animated: true)
+    }
+    
+    @objc func handleFavorites() {
+        navigationController?.pushViewController(FavoritesController(), animated: true)
     }
     
     @objc func handleAbout() {

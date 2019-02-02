@@ -22,12 +22,6 @@ class ItemActionBar: UIView {
 
     let add = UIButton(type: .system)
     let addIcon = UIImage(named: "plus")
-
-    let thumbsUp = UIButton(type: .system)
-    let thumbsUpIcon = UIImage(named: "thumbs_up")
-    
-    let thumbsDown = UIButton(type: .system)
-    let thumbsDownIcon = UIImage(named: "thumbs_down")
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -45,17 +39,9 @@ class ItemActionBar: UIView {
         add.setImage(addIcon, for: .normal)
         add.tintColor = UIColor.App.primaryText
         
-        thumbsUp.setImage(thumbsUpIcon, for: .normal)
-        thumbsUp.tintColor = UIColor.App.primaryText
-        
-        thumbsDown.setImage(thumbsDownIcon, for: .normal)
-        thumbsDown.tintColor = UIColor.App.primaryText
-        
         stack.addArrangedSubview(share)
         stack.addArrangedSubview(shuffle)
         stack.addArrangedSubview(add)
-        stack.addArrangedSubview(thumbsDown)
-        stack.addArrangedSubview(thumbsUp)
         
         stack.widthAnchor.constraint(equalTo: self.widthAnchor, constant: -60).isActive = true
         stack.centerCenter(parent: self)

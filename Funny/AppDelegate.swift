@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
-        window?.rootViewController =  UINavigationController(rootViewController: HomeController())
+        window?.rootViewController =  UINavigationController(rootViewController: LatestController())
         
         // Style navbar
         UINavigationBar.appearance().barTintColor = .black

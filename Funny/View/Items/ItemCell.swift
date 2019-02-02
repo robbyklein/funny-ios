@@ -83,6 +83,12 @@ class ItemCell: UICollectionViewCell, UIScrollViewDelegate {
         }
     }
     
+    func loadImage(data: Data) {
+        if let image = UIImage(data: data) {
+            self.placeImage(image: image)
+        }
+    }
+    
     func placeImage(image: UIImage) {
         DispatchQueue.main.async() {
             // Calculate scaled height

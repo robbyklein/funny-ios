@@ -7,12 +7,20 @@
 //
 
 import Foundation
+import UIKit
 
 struct Item:Decodable {
     let id:Int
-    let tags:[String]
-    let source:String
+    let source:String?
     let published:Bool
+    let image:Data?
+    
+    init(favorite: Favorite) {        
+        self.id = Int(favorite.id)
+        self.source = nil
+        self.published = favorite.published
+        self.image = favorite.image as Data
+    }
 }
 
 struct Items:Decodable {

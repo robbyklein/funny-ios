@@ -1,5 +1,5 @@
 //
-//  HomeController.swift
+//  ItemsController.swift
 //  Funny
 //
 //  Created by Robby Klein on 1/23/19.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class ItemsController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     // -----------------------------
     // MARK: Properties / Elements
     // -----------------------------
@@ -48,23 +48,6 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         // Register Cell
         collectionView.register(ItemCell.self, forCellWithReuseIdentifier: cellId)
         
-        // Fetch data        
-        Networking.shared.fetchJson(url: ApiRoutes.fetchItems) { (items:Items?, error:Error?) in
-            if (error != nil) {
-                if let error = error?.localizedDescription {
-                    print(error)
-                }
-                return
-            }
-            
-            if let items = items {
-                self.items = items.items
-                
-                DispatchQueue.main.async() {
-                    self.collectionView.reloadData()
-                }
-            }
-        }
         
         // Snapping
         collectionView.isPagingEnabled = true
@@ -79,7 +62,19 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         // Events
         actionbar.share.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleShare)))
         actionbar.shuffle.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleShuffle)))
+        actionbar.add.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleFavorite)))
 
+    }
+    
+    // -----------------------------
+    // MARK: Load Items
+    // -----------------------------
+    func loadItems(items: [Item]) {
+        self.items = items
+        
+        DispatchQueue.main.async() {
+            self.collectionView.reloadData()
+        }
     }
     
     // -----------------------------
@@ -141,6 +136,32 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         }
     }
     
+    @objc func handleFavorite() {
+        // Get active item
+        let cellIndexes = collectionView.indexPathsForVisibleItems
+        
+        if cellIndexes.count > 0 {
+            let item = self.items[Int(cellIndexes[0][1])]
+            let cell = collectionView.cellForItem(at: cellIndexes[0]) as! ItemCell
+            
+            if let source = item.source {
+                let ex = source.suffix(4).lowercased()
+                
+                if let image = cell.imageView.image {
+                    if let imageData = ex == ".png" ? image.pngData() : image.jpegData(compressionQuality: 1) {
+                        // Create favorite
+                        let favorite = Favorite(context: Core.context)
+                        favorite.id = Int16(item.id)
+                        favorite.image = imageData as NSData
+                        
+                        // Save it
+                        Core.saveContext()
+                    }
+                }
+            }
+        }
+    }
+    
     // -----------------------------
     // MARK: Stylistic
     // -----------------------------
@@ -162,9 +183,14 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         let item = items[indexPath.row]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! ItemCell
         
-        let imageUrl = ApiRoutes.imageUrl(path: item.source)
-    
-        cell.setImage(url: imageUrl)
+        if let source = item.source {
+            let imageUrl = ApiRoutes.imageUrl(path: source)
+            cell.setImage(url: imageUrl)
+        }
+        
+        if let data = item.image {
+            cell.loadImage(data: data)
+        }
 
         return cell
     }
