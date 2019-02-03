@@ -133,7 +133,8 @@ class ItemsController: UICollectionViewController, UICollectionViewDelegateFlowL
                 // Reload collection view
                 collectionView.reloadData()
                 
-                // TODO: Show shuffle confirmation
+                // Success Message
+                self.flash(view: self.actionbar, message: "Items shuffled!")
             }
         }
     }
@@ -145,7 +146,8 @@ class ItemsController: UICollectionViewController, UICollectionViewDelegateFlowL
         // Make sure they exist
         if cellIndexes.count > 0 {
             // Get item the cell represents
-            let item = self.items[Int(cellIndexes[0][1])]
+            let itemIndex = Int(cellIndexes[0][1])
+            let item = self.items[itemIndex]
             
             // Get the actual cell
             let cell = collectionView.cellForItem(at: cellIndexes[0]) as! ItemCell
@@ -167,7 +169,14 @@ class ItemsController: UICollectionViewController, UICollectionViewDelegateFlowL
                         // Save it
                         Core.saveContext()
                         
-                        // TODO: Remove from collectionview and show confirmation
+                        // Remove item
+                        self.items.remove(at: itemIndex)
+                        
+                        // Refresh collection view
+                        collectionView.reloadData()
+                        
+                        // Success message
+                        self.flash(view: actionbar, message: "Added to Favorites")
                     }
                 }
             }
