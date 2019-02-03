@@ -48,7 +48,9 @@ class Networking {
     }
     
     func fetchImageData(url: String, completion: @escaping (_ data: Data?, Error?) -> ()) {
+        // Create url object
         if let url = URL(string: url) {
+            // Start image download
             URLSession.shared.dataTask(with: url) { (data, response, error) in
                 // Image not found
                 if let httpResponse = response as? HTTPURLResponse {

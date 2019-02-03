@@ -10,10 +10,10 @@ import Foundation
 import CoreData
 
 class Core {
-    // Only one instance allowed
+    // Make outside initiation impossible
     private init() {}
     
-    // Create singleton
+    // Create singleton instance
     static var context:NSManagedObjectContext {
         return persistentContainer.viewContext
     }
@@ -34,7 +34,6 @@ class Core {
         if context.hasChanges {
             do {
                 try context.save()
-                print("saved!")
             } catch {
                 let nserror = error as NSError
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")

@@ -9,11 +9,9 @@
 import UIKit
 
 extension UIViewController {
-
-    
     func setupNav(close:Bool = false) {
         // Add logo
-        let logo = UIBarButtonItem(image: UIImage(named: "logo"), style: .plain, target: self, action: nil)
+        let logo = UIBarButtonItem(image: UIImage(named: "logo"), style: .plain, target: self, action: #selector(handleLogo))
         self.navigationItem.leftBarButtonItem = logo
         
         // Burger/Back Button
@@ -33,4 +31,13 @@ extension UIViewController {
     @objc func handleMenuClose() {
         navigationController?.popViewController(animated: true)
     }
+    
+    @objc func handleLogo() {
+        // Go to latest only if elsewhere
+        if !(navigationController?.topViewController is LatestController) {
+            navigationController?.pushViewController(LatestController(), animated: true)
+
+        }
+    }
 }
+

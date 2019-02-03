@@ -8,6 +8,7 @@
 
 import UIKit
 
+// App color scheme variables
 extension UIColor {
     struct App {
         static var background: UIColor  { return UIColor.Hex(hex: "161616") }

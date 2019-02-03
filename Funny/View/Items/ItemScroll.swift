@@ -10,9 +10,13 @@ import UIKit
 
 class ItemScroll: UIScrollView {
     override init(frame: CGRect) {
+        // Init UIScrollvVew
         super.init(frame: .zero)
         
+        // All autolayout constraints
         self.translatesAutoresizingMaskIntoConstraints = false
+        
+        // Set the background color
         self.backgroundColor = UIColor.App.background
 
     }

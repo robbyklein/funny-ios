@@ -15,6 +15,7 @@ struct Item:Decodable {
     let published:Bool
     let image:Data?
     
+    // Create item from a favorite
     init(favorite: Favorite) {        
         self.id = Int(favorite.id)
         self.source = nil

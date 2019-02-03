@@ -9,12 +9,16 @@
 import UIKit
 
 class LatestController: ItemsController {
-    
     override func viewDidLoad() {
+        // Setup collection view
         super.viewDidLoad()
+        
+        // Set navigation title
+        navigationItem.title = "Latest"
         
         // Fetch data
         Networking.shared.fetchJson(url: ApiRoutes.fetchItems) { (items:Items?, error:Error?) in
+            // Something went wrong
             if (error != nil) {
                 if let error = error?.localizedDescription {
                     print(error)
@@ -23,6 +27,7 @@ class LatestController: ItemsController {
             }
             
             if let items = items {
+                // Load items into parent collection view
                 super.loadItems(items: items.items)
             }
         }

@@ -8,6 +8,7 @@
 
 import Foundation
 
+// Add custom errors easily
 extension String: LocalizedError {
     public var errorDescription: String? { return self }
 }
