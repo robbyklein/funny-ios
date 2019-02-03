@@ -16,6 +16,9 @@ class LatestController: ItemsController {
         // Set navigation title
         navigationItem.title = "Latest"
         
+        // Add add button to actionbar
+        self.actionbar.addToFavorites()
+        
         // Fetch data
         Networking.shared.fetchJson(url: ApiRoutes.fetchItems) { (items:Items?, error:Error?) in
             // Something went wrong

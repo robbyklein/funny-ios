@@ -74,8 +74,8 @@ class ItemsController: UICollectionViewController, UICollectionViewDelegateFlowL
         actionbar.setSize(parent: view)
     }
     
-    // MARK: Event Handlers
-    @objc func handleShare() {
+    // MARK: Class Helpers
+    func getActiveCell() -> ItemCell? {
         // Get active indexes
         let cellIndexes = collectionView.indexPathsForVisibleItems
         
@@ -86,7 +86,47 @@ class ItemsController: UICollectionViewController, UICollectionViewDelegateFlowL
             
             // Grab the cell
             let cell = collectionView.cellForItem(at: cellIndex) as! ItemCell
-
+            
+            // Return it
+            return cell
+        }
+        
+        return nil
+    }
+    
+    func getActiveItem() -> Item? {
+        // Get active indexes
+        let cellIndexes = collectionView.indexPathsForVisibleItems
+        
+        // Make sure they exist
+        if cellIndexes.count > 0 {
+            // Get item the cell represents
+            let itemIndex = Int(cellIndexes[0][1])
+            let item = self.items[itemIndex]
+            
+            return item
+        }
+        
+         return nil
+    }
+    
+    func getActiveItemIndex() -> Int? {
+        // Get active indexes
+        let cellIndexes = collectionView.indexPathsForVisibleItems
+        
+        // Make sure they exist
+        if cellIndexes.count > 0 {
+            // Get item the cell represents
+            let itemIndex = Int(cellIndexes[0][1])
+            return itemIndex
+        }
+        
+        return nil
+    }
+    
+    // MARK: Event Handlers
+    @objc func handleShare() {
+        if let cell = getActiveCell() {
             // Check that cell has an image
             if let image = cell.imageView.image {
                 // set up activity view controller
@@ -182,7 +222,7 @@ class ItemsController: UICollectionViewController, UICollectionViewDelegateFlowL
             }
         }
     }
-    
+        
     // MARK: Collection View Methods
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return items.count

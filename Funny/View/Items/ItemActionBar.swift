@@ -18,6 +18,9 @@ class ItemActionBar: UIView {
     let add = UIButton(type: .system)
     let addIcon = UIImage(named: "plus")
     
+    let sub = UIButton(type: .system)
+    let subIcon = UIImage(named: "minus")
+
     override init(frame: CGRect) {
         // Init UIView
         super.init(frame: frame)
@@ -36,9 +39,10 @@ class ItemActionBar: UIView {
         shuffle.tintColor = UIColor.App.primaryText
         add.setImage(addIcon, for: .normal)
         add.tintColor = UIColor.App.primaryText
+        sub.setImage(subIcon, for: .normal)
+        sub.tintColor = UIColor.App.primaryText
         stack.addArrangedSubview(share)
         stack.addArrangedSubview(shuffle)
-        stack.addArrangedSubview(add)
         
         // Style/Position elements in view
         stack.widthAnchor.constraint(equalTo: self.widthAnchor, constant: -60).isActive = true
@@ -47,6 +51,14 @@ class ItemActionBar: UIView {
     
     convenience init() {
         self.init(frame: .zero)
+    }
+    
+    func addToFavorites() {
+        stack.addArrangedSubview(add)
+    }
+    
+    func removeFromFavorites() {
+        stack.addArrangedSubview(sub)
     }
     
     required init?(coder aDecoder: NSCoder) {
