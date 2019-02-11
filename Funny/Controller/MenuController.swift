@@ -11,9 +11,9 @@ import UIKit
 class MenuController: UIViewController {
     // Menu Elements
     let nav = Stack(axis: .vertical, spacing: 30, distribution: .equalSpacing)
-    let latest = MenuItem(title: "Latest", to: LatestController())
-    let favorites = MenuItem(title: "Favorites", to: LatestController())
-    let about = MenuItem(title: "About", to: LatestController())
+    let latest = MenuItem(title: "Latest")
+    let favorites = MenuItem(title: "Favorites")
+    let tags = MenuItem(title: "Tags")
 
     override func viewDidLoad() {
         // Show X on nav instead of burger
@@ -26,18 +26,18 @@ class MenuController: UIViewController {
         view.addSubview(nav)
         nav.addArrangedSubview(latest)
         nav.addArrangedSubview(favorites)
-        nav.addArrangedSubview(about)
+        nav.addArrangedSubview(tags)
         
         // Style/Position Elements
         nav.topLeft(parent: view, leftConstant: 20, topConstant: 40)
         latest.setWidth(parent: view)
         favorites.setWidth(parent: view)
-        about.setWidth(parent: view)
+        tags.setWidth(parent: view)
         
         // Add tap Events
         latest.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleLatest)))
         favorites.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleFavorites)))
-        about.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleAbout)))
+        tags.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTags)))
     }
     
     @objc func handleLatest() {
@@ -48,7 +48,7 @@ class MenuController: UIViewController {
         navigationController?.pushViewController(FavoritesController(), animated: true)
     }
     
-    @objc func handleAbout() {
-        navigationController?.pushViewController(AboutController(), animated: true)
+    @objc func handleTags() {
+        navigationController?.pushViewController(TagsController(), animated: false)
     }
 }

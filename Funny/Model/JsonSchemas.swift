@@ -28,3 +28,12 @@ struct Items:Decodable {
     let items: [Item]
     let pages: Int
 }
+
+struct Tag:Decodable {
+    let id:Int
+    let title:String
+}
+
+struct Tags:Decodable {
+    let tags: [Tag]
+}

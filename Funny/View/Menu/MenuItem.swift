@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MenuItem: UIButton {
+class MenuItem: UIButton {    
     // Image view for right arrow
     let right = Image()
     
@@ -17,7 +17,7 @@ class MenuItem: UIButton {
         super.init(frame: frame)
     }
     
-    convenience init(title: String, to: UIViewController) {
+    convenience init(title: String) {
         self.init(frame: .zero)
         
         // Add image to button

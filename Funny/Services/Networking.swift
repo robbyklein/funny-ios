@@ -22,10 +22,11 @@ class Networking {
     // Fetch json
     func fetchJson<T:Decodable>(url: String, completion: @escaping (T?, Error?) -> ()) {
         // Create url from string
-        guard let url = URL(string: ApiRoutes.fetchItems) else { return }
+        guard let url = URL(string: url) else { return }
         
         
         URLSession.shared.dataTask(with: url) { (data, response, error) in
+        
             // Return early if there's an error
             if let error = error {
                 completion(nil, error)
