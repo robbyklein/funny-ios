@@ -56,10 +56,10 @@ class TagsController: UIViewController {
     }
     
     func addMenuItems() {
-        for tag in self.tags {
+        for (index, tag) in self.tags.enumerated() {
             // Add a menu item to stack view
             let navItem = MenuItem(title: tag.title.capitalized)
-            navItem.tag = tag.id
+            navItem.tag = index
             self.nav.addArrangedSubview(navItem)
             navItem.setWidth(parent: self.view)
             
@@ -70,10 +70,17 @@ class TagsController: UIViewController {
     
     @objc func handleTag(tapGesture: UITapGestureRecognizer) {
         if let view = tapGesture.view {
-            // Get the tag id
-            let id = Int(view.tag)
+            // Fetch the tag object using index
+            let tag = self.tags[Int(view.tag)]
             
-            print(id)
+            // Set props on the view controller before loading
+            let viewController = TagItemsController()
+            viewController.tagId = tag.id
+            viewController.tagName = tag.title
+            
+            // Navigate to it
+            navigationController?.pushViewController(viewController, animated: true)
+
         }
     }
 }
