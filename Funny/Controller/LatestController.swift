@@ -13,6 +13,8 @@ class LatestController: ItemsController {
         // Setup collection view
         super.viewDidLoad()
         
+        super.type = "latest"
+        
         // Set navigation title
         navigationItem.title = "Latest"
         
@@ -20,19 +22,7 @@ class LatestController: ItemsController {
         self.actionbar.addToFavorites()
         
         // Fetch data
-        Networking.shared.fetchJson(url: ApiRoutes.fetchItems) { (items:Items?, error:Error?) in
-            // Something went wrong
-            if (error != nil) {
-                if let error = error?.localizedDescription {
-                    print(error)
-                }
-                return
-            }
-            
-            if let items = items {
-                // Load items into parent collection view
-                super.loadItems(items: items.items)
-            }
-        }
+        let url = ApiRoutes.fetchItems(page: super.page)
+        super.fetchItems(url: url)
     }
 }

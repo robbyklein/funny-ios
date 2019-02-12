@@ -12,6 +12,9 @@ class ItemsController: UICollectionViewController, UICollectionViewDelegateFlowL
     // Properties
     let cellId = "itemCell"
     var items = [Item]()
+    var finished = false
+    var page = 1
+    var type:String?
     
     // Elements
     let actionbar = ItemActionBar()
@@ -36,7 +39,7 @@ class ItemsController: UICollectionViewController, UICollectionViewDelegateFlowL
     
     // Load in items
     func loadItems(items: [Item]) {
-        self.items = items
+        self.items += items
         
         // Refresh collection view
         DispatchQueue.main.async() {
@@ -64,6 +67,31 @@ class ItemsController: UICollectionViewController, UICollectionViewDelegateFlowL
         actionbar.share.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleShare)))
         actionbar.shuffle.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleShuffle)))
         actionbar.add.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleFavorite)))
+    }
+    
+    func fetchItems(url: String) {
+        Networking.shared.fetchJson(url: url) { (items:Items?, error:Error?) in
+            // Something went wrong
+            if (error != nil) {
+                if let error = error?.localizedDescription {
+                    print(error)
+                }
+                return
+            }
+            
+            if let items = items {
+                // Load items into parent collection view
+                self.loadItems(items: items.items)
+                
+                if self.page == items.pages {
+                    self.finished = true
+                }  else {
+                     self.page += 1
+                }
+
+                print(self.page, self.finished)
+            }
+        }
     }
     
     func setupView() {
@@ -227,6 +255,7 @@ class ItemsController: UICollectionViewController, UICollectionViewDelegateFlowL
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return items.count
     }
+
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         // Get the item
@@ -241,8 +270,19 @@ class ItemsController: UICollectionViewController, UICollectionViewDelegateFlowL
         }
         
         // If image is in coredata (item is a Favorite), load it
+        print(indexPath.row)
         if let data = item.image {
             cell.loadImage(data: data)
+        }
+        
+//        if
+//        - not on favorites
+//        - first page loaded
+//        - 5 away from end
+//        - next page exists
+
+        if (item.image == nil && indexPath.row > 0 && indexPath.row == items.count - 5 && !finished) {
+            self.fetchItems(url: ApiRoutes.fetchItems(page: self.page))
         }
 
         return cell

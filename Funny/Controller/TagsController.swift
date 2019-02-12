@@ -76,7 +76,7 @@ class TagsController: UIViewController {
             // Set props on the view controller before loading
             let viewController = TagItemsController()
             viewController.tagId = tag.id
-            viewController.tagName = tag.title
+            viewController.tagName = tag.title.capitalized
             
             // Navigate to it
             navigationController?.pushViewController(viewController, animated: true)

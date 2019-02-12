@@ -11,7 +11,6 @@ import UIKit
 class TagItemsController: ItemsController {
     var tagId:Int?
     var tagName:String?
-    var page = 1
     
     override func viewDidLoad() {
         // Setup collection view
@@ -25,22 +24,8 @@ class TagItemsController: ItemsController {
         
         // Fetch data
         if let tagId = tagId {
-            let url = ApiRoutes.fetchTagItems(id: tagId, page: self.page)
-            
-            Networking.shared.fetchJson(url: url) { (items:Items?, error:Error?) in
-                // Something went wrong
-                if (error != nil) {
-                    if let error = error?.localizedDescription {
-                        print(error)
-                    }
-                    return
-                }
-                
-                if let items = items {
-                    // Load items into parent collection view
-                    super.loadItems(items: items.items)
-                }
-            }
+            let url = ApiRoutes.fetchTagItems(id: tagId, page: super.page)
+            super.fetchItems(url: url)
         }
 
     }
